@@ -1,0 +1,98 @@
+default_stages: [pre-commit]
+default_install_hook_types: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-ast
+        language_version: python3.12
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+        exclude: "(.devcontainer|.vscode)"
+      - id: check-toml
+      - id: check-yaml
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: detect-private-key
+
+  - repo: https://github.com/hadialqattan/pycln
+    rev: v2.4.0
+    hooks:
+      - id: pycln
+        name: Find and remove unused import statements.
+        args: [./src, --all]
+        pass_filenames: false
+
+  - repo: https://github.com/ambv/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+        name: Code formatting
+        language_version: python3.12
+        args: [--config=pyproject.toml]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: "7.0.0"
+    hooks:
+      - id: flake8
+        name: Check code against the pep8 standard
+        args: [--config=.flake8]
+        # exclude: (src/..../file.py)
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: Sort imports
+        files: /.*\.py$
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.8
+    hooks:
+      - id: bandit
+        name: Security checks for python packages
+        args: [-l, --recursive, -x, tests]
+        files: /.*\.py$
+
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.7.0
+    hooks:
+      - id: interrogate
+        name: Check python docstring coverage
+        language_version: python3.12
+        types: [python]
+        args: [--config=pyproject.toml]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+      - id: mypy
+        name: Python type checking
+        args: [--config-file=pyproject.toml]
+        # exclude: (src/...file.py)
+        additional_dependencies:
+          - types-cachetools
+          - pytest
+          - types-requests
+          - types-protobuf
+          - python-dotenv
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        name: codespell
+        description: Checks for common misspellings in text files.
+        entry: codespell --toml=pyproject.toml
+        language: python
+        types: [text]
+        additional_dependencies:
+          - tomli
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.3
+    hooks:
+      - id: gitleaks
+        name: detect hard coded passwords, api keys, and tokens
