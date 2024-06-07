@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
 from config import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
