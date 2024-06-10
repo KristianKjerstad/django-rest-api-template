@@ -1,8 +1,9 @@
-import logging
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 def get_env_var(key: str, allow_none=False) -> str | None:
     env_value = os.getenv(key, None)

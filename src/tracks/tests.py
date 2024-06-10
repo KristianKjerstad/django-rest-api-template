@@ -5,6 +5,7 @@ from tracks.api import router
 
 headers = {"Authorization": "Bearer supersecret"}
 
+
 class HelloTest(TestCase):
     def test_get_tracks(self):
         client = TestClient(router_or_app=router)

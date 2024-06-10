@@ -1,5 +1,5 @@
-
 from django.db import models
+
 
 class Track(models.Model):
     title = models.CharField(max_length=250)
@@ -8,4 +8,4 @@ class Track(models.Model):
     last_play = models.DateTimeField()
 
     class Meta:
-        db_table = 'track'
+        db_table = "track"

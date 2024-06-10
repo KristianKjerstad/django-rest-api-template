@@ -71,7 +71,7 @@ repos:
       - id: mypy
         name: Python type checking
         args: [--config-file=pyproject.toml]
-        # exclude: (src/...file.py)
+        exclude: (src/tracks/migrations)
         additional_dependencies:
           - types-cachetools
           - pytest
@@ -87,6 +87,7 @@ repos:
         description: Checks for common misspellings in text files.
         entry: codespell --toml=pyproject.toml
         language: python
+        exclude: (src/data)
         types: [text]
         additional_dependencies:
           - tomli

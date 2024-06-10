@@ -1,10 +1,9 @@
-
-
 from ninja import Schema
 
 
 class HelloSchema(Schema):
     name: str = "world"
+
 
 class UserSchema(Schema):
     username: str

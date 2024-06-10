@@ -1,6 +1,7 @@
 from ninja import Router
 
-from apitemplate.schemas import HelloSchema, UserSchema, Error
+from apitemplate.schemas import Error, HelloSchema, UserSchema
+
 router = Router()
 
 
