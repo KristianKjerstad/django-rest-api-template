@@ -16,7 +16,12 @@ class GlobalAuth(HttpBearer):
             return token
         raise InvalidToken
 
-api = NinjaAPI(csrf=True, auth=GlobalAuth())
+openapi_extra = {
+    "info": {"termsOfService": "https://example.com/terms/"},
+
+}
+
+api = NinjaAPI(csrf=True, auth=GlobalAuth(), openapi_extra=openapi_extra, title="Demo API", description="This is a demo API with dynamic OpenAPI info section")
 api.add_router("/tracks", tracks_router)
 api.add_router("/api", api_router)
 
