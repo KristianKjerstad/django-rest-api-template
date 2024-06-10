@@ -1,8 +1,10 @@
 
 
+import random
 from typing import List, Optional
 from ninja import Router, Query
 from ninja.pagination import paginate, LimitOffsetPagination, PageNumberPagination
+from apitemplate.exceptions import ServiceUnavailableError
 from tracks.models import Track
 from tracks.schema import NotFoundSchema, TrackFilters, TrackSchema
 
@@ -48,6 +50,8 @@ def change_track(request, track_id: int, data: TrackSchema):
 
 @router.delete("/{track_id}", response={204: None, 404: NotFoundSchema})
 def delete_track(request, track_id: int):
+    if random.choice([True, False]):
+        raise ServiceUnavailableError()
     try:
         track = Track.objects.get(id=track_id)
         track.delete()
